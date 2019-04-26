@@ -8,11 +8,6 @@ import org.springframework.stereotype.Service;
 import com.manage.app.member.Member;
 
 
-//@Service("memService")
-//@Component
-//@Component("memService")
-//@Repository
-//@Repository("memService")
 @Service
 public class MemberService implements IMemberService {
 
