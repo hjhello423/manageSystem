@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Registration Page</title>
+  <title>Serial Manager</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -93,81 +93,93 @@
 
 
   $("#registerBtn").click(function(){
-	  console.log("======");
-	  console.log("======");
-	  console.log("======");
-	  sleep(5000);
-      //checkData();
+    checkData();
   });
 
 
   function checkData() {
-      console.log( $("#input[name=memMail]").val() );
+      console.log( $("input[name=memId]").val() );
+
+      if($("input[name=memId]").val().trim() == ""){
+          alert("ID을 입력 하세요");
+          $("input[name=memId]").focus();
+          return ;
+      }
+      
+    console.log("in ajax function");
+    console.log($("#registerMemberForm").serialize());
+    console.log($("#registerMemberForm").serializeArray());
+    console.log(JSON.stringify($("#registerMemberForm")));
+    
+    var formArray = $("#registerMemberForm").serializeArray();
+    var returnArray = {};
+
+    for (var i = 0; i < formArray.length; i++){
+
+      returnArray[formArray[i]['name']] = formArray[i]['value'];
+    }
+    
+
+    returnArray.stringify;
+    var _data = JSON.stringify(returnArray);
+
+    addMember(_data);
   }
 
-  function addMember(){
+  function addMember(_data){
 
-    function addSerial(){
-		$.ajax({
-            url : "/app/member/api/register",
-            type : "POST",
-            data : $("#registerMemberForm").serialize(),
-            dataType:'json',
-            // timeout : _timeout,
-            error : function(x){
-                if(x.status == 500){
-                    alert("서버상에서 오류가 발생했습니다.\n" + x.responseText);
-                }
-                enter_flag = 0;
-            },
-            success : function(data){
-                if(data.redirect){
-                    window.location.href = data.redirect;
-                    return;
-                }
-                if(data.errMsg){
-                    alert("서버상에서 오류가 발생했습니다.\n" + data.errMsg.SLmsg);
-                    return;
-                }else if(data.info == 'badMac'){
-                    alert('MAC을 확인해 주세요');
-                    return;
-                }else if(data.ser){
-                    if(confirm(data.ser + '이 등록 되었습니다\n정보페이지로 이동하시겠습니까?'))
-                        window.location.href = '/infoSerial/'+data.ser;
-                }else if(data.info == 'readFail'){
-                    alert('등록된 정보를 가져오는데 실패했습니다.');
-                    return;
-                }else if(data.resultSer){
-                    $("#result_ser").text(data.resultSer[0].ser);
-                    $("#result_lic").text(data.resultSer[0].lic);
-                    $("#result_note2").text(data.resultSer[0].note);
-                    $("#btnGoSerialInfo").attr('onclick', "location.href='/infoSerial/" + data.resultSer[0].ser + "'");
-                    $("#btnModal").trigger("click");
-                }else
-                    alert('알수 없는 오류가 발생했습니다');
-            },
-            beforeSend: function(){
-                $('.wrap-loading').removeClass('display-none');
-            },              
-            complete: function(){
-                $('.wrap-loading').addClass('display-none');
-                enter_flag = 0;
-            }
-        });
-	}
+	$.ajax({
+      url : "/app/member/api/register",
+      type : "POST",
+      data : _data,
+      // data : JSON.stringify($("#registerMemberForm")),
+      contentType : "application/json; charset=UTF-8",
+      // dataType:'json',
+      error : function(x){
+          if(x.status == 500){
+              alert("서버상에서 오류가 발생했습니다.\n" + x.responseText);
+          }
+          enter_flag = 0;
+      },
+      success : function(data){
+        console.log("success-------------");
+        return ;
+
+
+          if(data.redirect){
+              window.location.href = data.redirect;
+              return;
+          }
+          if(data.errMsg){
+              alert("서버상에서 오류가 발생했습니다.\n" + data.errMsg.SLmsg);
+              return;
+          }else if(data.info == 'badMac'){
+              alert('MAC을 확인해 주세요');
+              return;
+          }else if(data.ser){
+              if(confirm(data.ser + '이 등록 되었습니다\n정보페이지로 이동하시겠습니까?'))
+                  window.location.href = '/infoSerial/'+data.ser;
+          }else if(data.info == 'readFail'){
+              alert('등록된 정보를 가져오는데 실패했습니다.');
+              return;
+          }else if(data.resultSer){
+              $("#result_ser").text(data.resultSer[0].ser);
+              $("#result_lic").text(data.resultSer[0].lic);
+              $("#result_note2").text(data.resultSer[0].note);
+              $("#btnGoSerialInfo").attr('onclick', "location.href='/infoSerial/" + data.resultSer[0].ser + "'");
+              $("#btnModal").trigger("click");
+          }else
+              alert('알수 없는 오류가 발생했습니다');
+      },
+      beforeSend: function(){
+          // $('.wrap-loading').removeClass('display-none');
+      },              
+      complete: function(){
+          // $('.wrap-loading').addClass('display-none');
+          // enter_flag = 0;
+      }
+  });
   }
-
-//   functoin checkData(){
-
-//     // console.log( $("#input[name=memMail]").val() );
-
-//     // if($("#input[name=memMail]").val() == "non"){
-//     //     alert("제품종류를 선택 하세요");
-//     //     $("#model_line").focus();
-//     //     enter_flag = 0;
-//     //     return ;
-//     // }
-//   };
 
 
 </script>

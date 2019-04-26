@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -24,11 +26,14 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.manage.app.MemberDB;
 import com.manage.app.member.Member;
 import com.manage.app.member.MemberLoginValidator;
@@ -76,11 +81,11 @@ public class MemberController {
 //		System.out.println(mem.getMemId());
 //		System.out.println(req.getParameter("memPw"));
 		
-		if (errors.hasErrors()) {
-			System.out.println("로그인 - @valid");
-			model.addAttribute("loginFail", messageSource.getMessage("loginFail",null,Locale.KOREA));
-			return "redirect:/";
-		}
+//		if (errors.hasErrors()) {
+//			System.out.println("로그인 - @valid");
+//			model.addAttribute("loginFail", messageSource.getMessage("loginFail",null,Locale.KOREA));
+//			return "redirect:/";
+//		}
 		
 		Member member = memberService.memberSearch(mem.getMemId(), mem.getMemPw());
 		session.setAttribute("member", member);
@@ -97,11 +102,22 @@ public class MemberController {
 		return "member/memberRegister";
 	}
 	
-	@RequestMapping(value = "/api/register", method = RequestMethod.GET)
-	public String memRegisterApi() {
+	@ResponseBody
+	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
+	public String memRegisterApi(@RequestBody HashMap<String, Object> registerMemberForm, HttpServletRequest req) {
+//	public String memRegisterApi(@RequestBody String registerMemberForm, HttpServletRequest req) {
+//	public String memRegisterApi(@RequestBody Member registerMemberForm, HttpServletRequest req) {
 		System.out.println("회원 등록 작업 실행");
 		
-		return "login";
+		
+		
+		Iterator itr = registerMemberForm.keySet().iterator();
+		
+			
+		System.out.println(registerMemberForm.toString());
+		System.out.println(registerMemberForm.get("memPw"));
+		
+		return "로그인";
 	}
 	
 	@RequestMapping(value="/memInfo", method=RequestMethod.GET)
@@ -130,9 +146,9 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(new MemberLoginValidator()); // 로그인 validater 등록
-	}
+//	@InitBinder
+//	protected void initBinder(WebDataBinder binder) {
+//		binder.setValidator(new MemberLoginValidator()); // 로그인 validater 등록
+//	}
 	
 }
