@@ -5,7 +5,7 @@ public class Member {
     private String memPw;
     private String memMail;
     private String memName;
-    private int memQualify;
+    private int memQualify = 3;
 
 	public String getMemId() {
 		return memId;

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,7 @@ import com.manage.app.member.service.MemberService;
 
 @Controller
 //@SessionAttributes("member")
+@RequestMapping("/member")
 public class MemberController {
 
 //	MemberService service = new MemberService();
@@ -88,6 +90,18 @@ public class MemberController {
 			
 		}
 		return "home";
+	}
+	
+	@RequestMapping(value = "/register")
+	public String memRegister() {
+		return "member/memberRegister";
+	}
+	
+	@RequestMapping(value = "/api/register", method = RequestMethod.GET)
+	public String memRegisterApi() {
+		System.out.println("회원 등록 작업 실행");
+		
+		return "login";
 	}
 	
 	@RequestMapping(value="/memInfo", method=RequestMethod.GET)
