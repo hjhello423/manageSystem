@@ -33,6 +33,17 @@
 	<!-- <context:component-scan base-package="com.manage.app" /> -->
 	<context:component-scan base-package="com.manage.*" />
 	
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/**"/>
+			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/register"/>
+			<exclude-mapping path="/member/api/register"/>
+			<beans:bean class="com.manage.app.LoginInterceptor" />
+		</interceptor>
+	</interceptors>
+	
 	<beans:bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<beans:property name="basenames">

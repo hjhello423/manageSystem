@@ -126,7 +126,7 @@
                     <a href="#" class="btn btn-default btn-flat">내 정보</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">로그아웃</a>
+                    <a href="/app/member/logout" class="btn btn-default btn-flat">로그아웃</a>
                   </div>
                 </li>
               </ul>

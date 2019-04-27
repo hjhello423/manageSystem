@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
@@ -52,7 +54,7 @@ public class MemberController {
 	
 	@Autowired
 	private ReloadableResourceBundleMessageSource messageSource;
-	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 //	@ModelAttribute("member")
 //	public Member memModel() {
@@ -69,8 +71,14 @@ public class MemberController {
 		return formattedDate;
 	}
 	
+	@RequestMapping("/test")
+	public String test() {
+		return "home";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@Valid Member mem, Errors errors, HttpServletRequest req, Model model) {
+	public String login(Member member, HttpServletRequest req, BindingResult bindingResult) {
+//	public String login(@Valid Member mem, Errors errors, HttpServletRequest req, Model model) {
 		
 		HttpSession session = req.getSession();
 
@@ -87,14 +95,23 @@ public class MemberController {
 //			return "redirect:/";
 //		}
 		
-		Member member = memberService.memberSearch(mem.getMemId(), mem.getMemPw());
-		session.setAttribute("member", member);
+		// id, pw 값 validate 
+//		new MemberLoginValidator().validate(member, bindingResult);
+//		if (bindingResult.hasErrors()) {
+//			System.out.println("로그인 정보 없음 - validator");
+//			return "redirect:/";
+//		}
 
-		if (member == null) {
+		Member mem = memberService.memberSearch(member.getMemId(), member.getMemPw());
+		if (mem == null) {
+			logger.info("로그인 실패 - 정보 없음");
 			return "redirect:/";
-			
 		}
-		return "home";
+
+		logger.info("로그인 완료 - 셔센 등록");
+		session.setAttribute("member", mem);
+		session.setMaxInactiveInterval(60*5); //5분 유지
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/register")
@@ -104,19 +121,14 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
-	public String memRegisterApi(@RequestBody HashMap<String, Object> registerMemberForm, HttpServletRequest req) {
-//	public String memRegisterApi(@RequestBody String registerMemberForm, HttpServletRequest req) {
-//	public String memRegisterApi(@RequestBody Member registerMemberForm, HttpServletRequest req) {
+	public String memRegisterApi(@RequestBody HashMap<String, String> registerMemberForm, HttpServletRequest req) {
 		System.out.println("회원 등록 작업 실행");
 		
+		Member mem = new Member(registerMemberForm.get("memId"), registerMemberForm.get("memPw"),
+				registerMemberForm.get("memName"), registerMemberForm.get("memMail"));
 		
-		
-		Iterator itr = registerMemberForm.keySet().iterator();
-		
+		memberService.memberRegister(mem);
 			
-		System.out.println(registerMemberForm.toString());
-		System.out.println(registerMemberForm.get("memPw"));
-		
 		return "로그인";
 	}
 	
@@ -140,9 +152,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(SessionStatus sessionStatus) {
-		sessionStatus.setComplete();
-		
+	public String logout(HttpServletRequest request) {
+		logger.info("로그 아웃 처리");
+		request.getSession().invalidate();
 		return "redirect:/";
 	}
 	

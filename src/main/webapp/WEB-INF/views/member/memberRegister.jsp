@@ -142,41 +142,7 @@
           enter_flag = 0;
       },
       success : function(data){
-        console.log("success-------------");
-        return ;
-
-
-          if(data.redirect){
-              window.location.href = data.redirect;
-              return;
-          }
-          if(data.errMsg){
-              alert("서버상에서 오류가 발생했습니다.\n" + data.errMsg.SLmsg);
-              return;
-          }else if(data.info == 'badMac'){
-              alert('MAC을 확인해 주세요');
-              return;
-          }else if(data.ser){
-              if(confirm(data.ser + '이 등록 되었습니다\n정보페이지로 이동하시겠습니까?'))
-                  window.location.href = '/infoSerial/'+data.ser;
-          }else if(data.info == 'readFail'){
-              alert('등록된 정보를 가져오는데 실패했습니다.');
-              return;
-          }else if(data.resultSer){
-              $("#result_ser").text(data.resultSer[0].ser);
-              $("#result_lic").text(data.resultSer[0].lic);
-              $("#result_note2").text(data.resultSer[0].note);
-              $("#btnGoSerialInfo").attr('onclick', "location.href='/infoSerial/" + data.resultSer[0].ser + "'");
-              $("#btnModal").trigger("click");
-          }else
-              alert('알수 없는 오류가 발생했습니다');
-      },
-      beforeSend: function(){
-          // $('.wrap-loading').removeClass('display-none');
-      },              
-      complete: function(){
-          // $('.wrap-loading').addClass('display-none');
-          // enter_flag = 0;
+        alert("회원 가입 완료");
       }
   });
   }

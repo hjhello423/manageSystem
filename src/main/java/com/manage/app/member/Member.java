@@ -7,6 +7,16 @@ public class Member {
     private String memName;
     private int memQualify = 3;
 
+    public Member() {
+	}
+    
+	public Member(String memId, String memPw, String memMail, String memName) {
+		this.memId = memId;
+		this.memPw = memPw;
+		this.memMail = memMail;
+		this.memName = memName;
+	}
+
 	public String getMemId() {
 		return memId;
 	}

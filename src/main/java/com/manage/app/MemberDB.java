@@ -39,5 +39,4 @@ public class MemberDB {
 	public void setData(HashMap<String, Member> data) {
 		data = data;
 	}
-
 }
