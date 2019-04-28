@@ -39,6 +39,7 @@ import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.manage.app.MemberDB;
 import com.manage.app.member.Member;
 import com.manage.app.member.MemberLoginValidator;
+import com.manage.app.member.MemberValidator;
 import com.manage.app.member.service.MemberService;
 
 
@@ -61,15 +62,15 @@ public class MemberController {
 //		return new Member();
 //	}
 	
-	@ModelAttribute("serverTime")
-	public String getServerTime() {
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		return formattedDate;
-	}
+//	@ModelAttribute("serverTime")
+//	public String getServerTime() {
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
+//		
+//		String formattedDate = dateFormat.format(date);
+//		
+//		return formattedDate;
+//	}
 	
 	@RequestMapping("/test")
 	public String test() {
@@ -77,30 +78,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Member member, HttpServletRequest req, BindingResult bindingResult) {
-//	public String login(@Valid Member mem, Errors errors, HttpServletRequest req, Model model) {
+	public String login(Member member, BindingResult bindingResult, HttpServletRequest request) {
 		
-		HttpSession session = req.getSession();
+		HttpSession session = request.getSession();
 
 //		System.out.println(messageSource.getClass());
 //		System.out.println(messageSource.getMessage("hello",null,Locale.KOREA));
 //		
-//		System.out.println("로그인 진행");
-//		System.out.println(mem.getMemId());
-//		System.out.println(req.getParameter("memPw"));
 		
-//		if (errors.hasErrors()) {
-//			System.out.println("로그인 - @valid");
-//			model.addAttribute("loginFail", messageSource.getMessage("loginFail",null,Locale.KOREA));
-//			return "redirect:/";
-//		}
-		
-		// id, pw 값 validate 
-//		new MemberLoginValidator().validate(member, bindingResult);
-//		if (bindingResult.hasErrors()) {
-//			System.out.println("로그인 정보 없음 - validator");
-//			return "redirect:/";
-//		}
+//		 id, pw 값 validate 
+		new MemberLoginValidator().validate(member, bindingResult);
+		if (bindingResult.hasErrors()) {
+			logger.info("로그인 실패 - valid");
+			return "redirect:/";
+		}
 
 		Member mem = memberService.memberSearch(member.getMemId(), member.getMemPw());
 		if (mem == null) {
@@ -119,10 +110,26 @@ public class MemberController {
 		return "member/memberRegister";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
-	public String memRegisterApi(@RequestBody HashMap<String, String> registerMemberForm, HttpServletRequest req) {
-		System.out.println("회원 등록 작업 실행");
+	public String memRegisterApi( @RequestBody HashMap<String, String> registerMemberForm, 
+			BindingResult bindingResult,  HttpServletRequest request) {
+		
+		Member mem1 = new Member(registerMemberForm);
+		
+		logger.info("==========");
+		logger.info(mem1.getMemId());
+		logger.info(mem1.getMemPw());
+		logger.info(mem1.getMemMail());
+		logger.info(mem1.getMemName());
+		logger.info("==========");
+		
+//		new MemberValidator().validate(new Member(registerMemberForm), bindingResult);
+//		if (bindingResult.hasErrors()) {
+//			logger.info("가입 실패 - valid");
+//			return "실패";
+//		}
 		
 		Member mem = new Member(registerMemberForm.get("memId"), registerMemberForm.get("memPw"),
 				registerMemberForm.get("memName"), registerMemberForm.get("memMail"));
@@ -131,6 +138,35 @@ public class MemberController {
 			
 		return "로그인";
 	}
+
+	
+//	@ResponseBody
+//	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
+//	public String memRegisterApi(@RequestBody HashMap<String, String> registerMemberForm, 
+//			BindingResult bindingResult,  HttpServletRequest request) {
+//		
+//		Member mem1 = new Member(registerMemberForm);
+//		
+//		logger.info("==========");
+//		logger.info(mem1.getMemId());
+//		logger.info(mem1.getMemPw());
+//		logger.info(mem1.getMemMail());
+//		logger.info(mem1.getMemName());
+//		logger.info("==========");
+//		
+//		new MemberValidator().validate(new Member(registerMemberForm), bindingResult);
+//		if (bindingResult.hasErrors()) {
+//			logger.info("가입 실패 - valid");
+//			return "실패";
+//		}
+//		
+//		Member mem = new Member(registerMemberForm.get("memId"), registerMemberForm.get("memPw"),
+//				registerMemberForm.get("memName"), registerMemberForm.get("memMail"));
+//		
+//		memberService.memberRegister(mem);
+//			
+//		return "로그인";
+//	}
 	
 	@RequestMapping(value="/memInfo", method=RequestMethod.GET)
 //	public String login(Member mem, HttpServletRequest req, BindingResult bindingResult) {

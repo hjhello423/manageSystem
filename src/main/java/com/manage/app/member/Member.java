@@ -1,8 +1,17 @@
 package com.manage.app.member;
 
+import java.lang.annotation.Native;
+import java.util.HashMap;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Member {
+	@NotEmpty
     private String memId;
+	@NotEmpty
     private String memPw;
+	@Email
     private String memMail;
     private String memName;
     private int memQualify = 3;
@@ -15,6 +24,13 @@ public class Member {
 		this.memPw = memPw;
 		this.memMail = memMail;
 		this.memName = memName;
+	}
+	
+	public Member(HashMap<String, String> member) {
+		this.memId = member.get("memId");
+		this.memPw = member.get("memPw");
+		this.memMail = member.get("memMail");
+		this.memName = member.get("memName");
 	}
 
 	public String getMemId() {

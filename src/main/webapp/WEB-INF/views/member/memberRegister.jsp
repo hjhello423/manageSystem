@@ -93,7 +93,7 @@
 
 
   $("#registerBtn").click(function(){
-    checkData();
+    // checkData();
   });
 
 
