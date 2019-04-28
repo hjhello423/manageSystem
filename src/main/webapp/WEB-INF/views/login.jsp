@@ -40,7 +40,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Login</p>
 
-    <form action="/app/member/login" method="post">
+    <form action="/app/login" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="ID" name="memId">
         <span class="glyphicon glyphicon glyphicon-log-in form-control-feedback"></span>
@@ -64,9 +64,9 @@
         <!-- /.col -->
       </div>
     </form>
-
+	${message}
     <a href="#">비밀번호 찾기</a><br>
-    <a href="/app/member/register" class="text-center">회원 가입</a>
+    <a href="/app/register" class="text-center">회원 가입</a>
 
   </div>
   <!-- /.login-box-body -->

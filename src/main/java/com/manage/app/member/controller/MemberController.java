@@ -77,69 +77,6 @@ public class MemberController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Member member, BindingResult bindingResult, HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-
-//		System.out.println(messageSource.getClass());
-//		System.out.println(messageSource.getMessage("hello",null,Locale.KOREA));
-//		
-		
-//		 id, pw 값 validate 
-		new MemberLoginValidator().validate(member, bindingResult);
-		if (bindingResult.hasErrors()) {
-			logger.info("로그인 실패 - valid");
-			return "redirect:/";
-		}
-
-		Member mem = memberService.memberSearch(member.getMemId(), member.getMemPw());
-		if (mem == null) {
-			logger.info("로그인 실패 - 정보 없음");
-			return "redirect:/";
-		}
-
-		logger.info("로그인 완료 - 셔센 등록");
-		session.setAttribute("member", mem);
-		session.setMaxInactiveInterval(60*5); //5분 유지
-		return "redirect:/";
-	}
-	
-	@RequestMapping(value = "/register")
-	public String memRegister() {
-		return "member/memberRegister";
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
-	public String memRegisterApi( @RequestBody HashMap<String, String> registerMemberForm, 
-			BindingResult bindingResult,  HttpServletRequest request) {
-		
-		Member mem1 = new Member(registerMemberForm);
-		
-		logger.info("==========");
-		logger.info(mem1.getMemId());
-		logger.info(mem1.getMemPw());
-		logger.info(mem1.getMemMail());
-		logger.info(mem1.getMemName());
-		logger.info("==========");
-		
-//		new MemberValidator().validate(new Member(registerMemberForm), bindingResult);
-//		if (bindingResult.hasErrors()) {
-//			logger.info("가입 실패 - valid");
-//			return "실패";
-//		}
-		
-		Member mem = new Member(registerMemberForm.get("memId"), registerMemberForm.get("memPw"),
-				registerMemberForm.get("memName"), registerMemberForm.get("memMail"));
-		
-		memberService.memberRegister(mem);
-			
-		return "로그인";
-	}
-
-	
 //	@ResponseBody
 //	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
 //	public String memRegisterApi(@RequestBody HashMap<String, String> registerMemberForm, 
@@ -187,12 +124,6 @@ public class MemberController {
 		return "member/memberInfo";
 	}
 	
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpServletRequest request) {
-		logger.info("로그 아웃 처리");
-		request.getSession().invalidate();
-		return "redirect:/";
-	}
 	
 //	@InitBinder
 //	protected void initBinder(WebDataBinder binder) {

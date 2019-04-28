@@ -13,7 +13,7 @@ import com.manage.app.member.Member;
 
 public class LoginInterceptor implements HandlerInterceptor{
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -22,7 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("member");
 		
-		System.out.println("request.getContextPath() : " + request.getContextPath()); 
+		logger.info("request.getContextPath() : " + request.getContextPath());
 		
 		if (member == null) {
 			logger.info("로그인 interceptor 처리 - session 없음");
@@ -30,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 			return false;
 		}
 		
-		logger.info("로그인 interceptor 처리 - session 있음");
+		logger.info("로그인 interceptor 처리 - pass");
 		
 		return true;
 	}

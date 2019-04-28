@@ -3,16 +3,22 @@ package com.manage.app.member;
 import java.lang.annotation.Native;
 import java.util.HashMap;
 
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Member {
-	@NotEmpty
+	@NotEmpty(message = "필수 사항 입니다.")
+	@Length(max = 10, min = 2, message = "2~10글자 입력.")
     private String memId;
-	@NotEmpty
+	@NotEmpty(message = "필수 사항 입니다.")
+	@Length(max = 10, min = 2, message = "2~10글자 입력.")
     private String memPw;
-	@Email
+	@Email(message = "잘못된 e-mail 주소 입니다.")
     private String memMail;
+	@Length(max = 5, min = 2, message = "2~5글자 입력.")
     private String memName;
     private int memQualify = 3;
 

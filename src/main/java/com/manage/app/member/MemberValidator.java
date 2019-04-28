@@ -19,7 +19,7 @@ public class MemberValidator implements Validator{
 //			errors.rejectValue("memId", "required");
 //		}
 		
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memId", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memId", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memPw", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memMail", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "memName", "required");
