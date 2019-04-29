@@ -1,17 +1,24 @@
 package com.manage.app;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +30,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.manage.app.member.Member;
 import com.manage.app.member.MemberValidator;
 import com.manage.app.member.service.MemberService;
+import com.mysql.cj.protocol.Message;
 
 /**
  * Handles requests for the application home page.
@@ -33,6 +41,9 @@ public class HomeController {
 	@Autowired
 	MemberService memberService;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	DataSource dataSource;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -49,7 +60,36 @@ public class HomeController {
 			logger.info("로그인 정보 X - 로그인 페이지 이동");
 			return "login";
 		}
+////////////////////////////////////////////////////////
+		
+		logger.info(dataSource.toString());
+		
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		List<Member> memList = jdbcTemplate.query(
+				"select * from member", 
+				new Object[] {},
+				new RowMapper<Member>() {
 
+					@Override
+					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Member m = new Member();
+						m.setMemId(rs.getString("id"));
+						m.setMemPw(rs.getString("pwd"));
+						m.setMemMail(rs.getString("mail"));
+						m.setMemName(rs.getString("name"));
+						
+						return m;
+					}
+				});
+		
+			System.out.println(memList.get(3).getMemId());
+		
+		
+		
+		
+//////////////////////////////////////////////////////		
 		logger.info("로그인 정보 O - 메인 페이지 이동 , ID:" + member.getMemId());
 		return "home";
 	}

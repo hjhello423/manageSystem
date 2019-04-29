@@ -40,38 +40,15 @@
 
 	<!-- <context:component-scan base-package="com.manage.app" /> -->
 	<context:component-scan
-		base-package="com.manage.*" />
-
-	<jpa:repositories base-package="com.manage.app.domain">
-	</jpa:repositories>
+		base-package="com.manage.app*" />
 
 	<beans:bean id="dataSource"
-		class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<beans:property name="driverClass"
-			value="com.mysql.jdbc.Driver" />
-		<beans:property name="jdbcUrl"
-			value="jdbc:mysql://localhost/hrdb?characterEncoding=utf8" />
-		<beans:property name="user" value="spring4" />
-		<beans:property name="password" value="spring4" />
-	</beans:bean>
-
-	<beans:bean id="jpaVendorAdapter"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-		<beans:property name="database" value="MYSQL" />
-		<beans:property name="showSql" value="true" />
-	</beans:bean>
-
-	<beans:bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="jpaVendorAdapter"
-			ref="jpaVendorAdapter" />
-		<beans:property name="packagesToScan">
-			<beans:list>
-				<beans:value>com.manage.app.domain</beans:value>
-			</beans:list>
-		</beans:property>
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://127.0.0.1:3306/serial?serverTimezone=UTC" />
+		<beans:property name="username" value="test" />
+		<beans:property name="password" value="1111" />
 	</beans:bean>
 
 	<interceptors>

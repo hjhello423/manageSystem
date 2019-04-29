@@ -8,17 +8,23 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.manage.app.MemberDB;
+import com.manage.app.domain.MemberRepository;
 import com.manage.app.member.Member;
 
-@Component
-//@Repository
+//@Component
+@Repository
 public class MemberDao implements IMemberDao {
 
 	private static HashMap<String, Member> dbMap;
+	
+//	@Autowired
+//	MemberRepository memberRepository;
+	
 
 
 	@PostConstruct

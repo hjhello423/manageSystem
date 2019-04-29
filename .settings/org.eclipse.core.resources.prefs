@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/manage/app/HomeController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/login.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/member/memberInfo.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/member/memberRegister.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/test.jsp=UTF-8
+encoding/<project>=UTF-8

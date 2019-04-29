@@ -43,13 +43,11 @@ import com.manage.app.member.MemberValidator;
 import com.manage.app.member.service.MemberService;
 
 
-@Controller
 //@SessionAttributes("member")
+@Controller
 @RequestMapping("/member")
 public class MemberController {
 
-//	MemberService service = new MemberService();
-//	@Resource(name="memService")
 	@Autowired
 	MemberService memberService;
 	

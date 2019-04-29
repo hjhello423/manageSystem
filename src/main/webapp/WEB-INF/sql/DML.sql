@@ -1,0 +1,9 @@
+INSERT INTO member values ("11", "11", "11@11.com", "11", 3);
+INSERT INTO member values ("12", "12", "22@22.com", "22", 3);
+INSERT INTO member values ("33", "33", "33@33.com", "33", 3);
+INSERT INTO member values ("44", "44", "44@44.com", "44", 3);
+INSERT INTO member values ("55", "55", "55@55.com", "55", 3);
+INSERT INTO member values ("66", "66", "66@66.com", "66", 3);
+INSERT INTO member values ("77", "77", "77@77.com", "77", 3);
+INSERT INTO member values ("88", "88", "88@88.com", "88", 3);
+INSERT INTO member values ("99", "99", "99@99.com", "99", 3);
