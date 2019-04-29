@@ -1,4 +1,4 @@
-package com.manage.app.member;
+package com.manage.app.domain;
 
 import java.lang.annotation.Native;
 import java.util.HashMap;
@@ -13,17 +13,19 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
+@Table(name = "member")
 public class Member {
-	@NotEmpty(message = "필수 사항 입니다.")
-	@Length(max = 10, min = 2, message = "2~10글자 입력.")
+	@Id
+	@Column(name = "id")
 	private String memId;
-	@NotEmpty(message = "필수 사항 입니다.")
-	@Length(max = 10, min = 2, message = "2~10글자 입력.")
+	@Column(name = "pwd")
 	private String memPw;
-	@Email(message = "잘못된 e-mail 주소 입니다.")
+	@Column(name = "mail")
 	private String memMail;
-	@Length(max = 5, min = 2, message = "2~5글자 입력.")
+	@Column(name = "name")
 	private String memName;
+	@Column(name = "mem_qualify")
 	private int memQualify = 3;
 
 	public Member() {

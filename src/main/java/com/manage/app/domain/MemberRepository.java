@@ -1,11 +1,15 @@
 package com.manage.app.domain;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-import com.manage.app.member.Member;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface MemberRepository   {
-//public interface MemberRepository extends CrudRepository<Member, String>  {
-//	Member findOne(String id);
-	
+//public interface MemberRepository   {
+public interface MemberRepository extends JpaRepository<Member, String> {
+
+	public Member findOne(String id);
+
+	public List<Member> findAll(Sort sort);
+
 }
