@@ -103,7 +103,6 @@ public class MemberController {
 		logger.info("멤버 수정 결과 -" + result);
 
 		return "member/profile";
-
 	}
 
 	@RequestMapping("/test")

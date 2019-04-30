@@ -64,7 +64,10 @@
         <!-- /.col -->
       </div>
     </form>
+	<p>
+	${meber.message}
 	${message}
+	</p>
     <a href="#">비밀번호 찾기</a><br>
     <a href="/app/register" class="text-center">회원 가입</a>
 

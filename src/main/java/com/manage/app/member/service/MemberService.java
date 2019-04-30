@@ -39,12 +39,8 @@ public class MemberService implements IMemberService {
 	public Member memberSearch(String memId, String memPw) {
 		Member member = null;
 
-		try {
-			member = memberRepository.findByMemIdAndMemPw(memId, memPw);
-			logger.info(member.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		member = memberRepository.findByMemIdAndMemPw(memId, memPw);
+		
 		return member;
 	}
 

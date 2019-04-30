@@ -147,15 +147,6 @@
 											<th>제품 시리즈</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>Serial</th>
-											<th>License</th>
-											<th>등록일</th>
-											<th>MAC</th>
-											<th>제품 시리즈</th>
-										</tr>
-									</tfoot>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -201,6 +192,13 @@
 		src="/app/resources/template/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 	<script>
+		function format(d){
+			var date = Date(d.regDate);
+			console.log( date);
+
+			return date;
+		};
+		
 		$(function() {
 			$('#example1').DataTable({
 				"ajax": "/app/product/myProduct",
@@ -211,14 +209,20 @@
 					{ "data": "mac" },
 					{ "data": "modelLine" }
 				],
-				'paging' : true,
-				'lengthChange' : false,
-				'searching' : false,
-				'ordering' : true,
-				'info' : true,
-				'autoWidth' : false
-			})
-		})
+				columnDefs:[{targets:2, render:function(data){
+					var d = new Date(data);
+					var time =  
+				    	d.getFullYear() + "-" +
+						("00" + (d.getMonth() + 1)).slice(-2) + "-" + 
+				    	("00" + d.getDate()).slice(-2) + " " + 
+				    	("00" + d.getHours()).slice(-2) + ":" + 
+				    	("00" + d.getMinutes()).slice(-2) + ":" + 
+				    	("00" + d.getSeconds()).slice(-2)
+				    	
+					return time;
+				}}],
+			});
+		});
 	</script>
 
 </body>

@@ -55,36 +55,22 @@ public class ProductService implements IProductService {
 
 	public HashMap<String, List<Product>> myProduct(Member member) {
 		String id = member.getMemId();
-		Iterable<Product> memberList =  productRepository.findByMem(member);
-		
-		logger.info("================");
-		logger.info(memberList.toString());
-		
-		HashMap<String, List<Product>>  map = new HashMap<String, List<Product>>();
-		List<Product>  list = new ArrayList<Product>();
-		
+		Iterable<Product> memberList = productRepository.findByMem(member);
+
+		HashMap<String, List<Product>> map = new HashMap<String, List<Product>>();
+		List<Product> list = new ArrayList<Product>();
+
 		Iterator<Product> itr = memberList.iterator();
 		while (itr.hasNext()) {
 			list.add(itr.next());
 		}
-		
-		logger.info("================");
-		logger.info(list.toString());
-		
+
 		map.put("data", list);
-		
-		logger.info("================");
 		logger.info(map.toString());
-		
-		
-		
-		logger.info("================");
-		logger.info("서비스 out");
-		
+
 		return map;
-		
 	}
-	
+
 	@Override
 	public Product productSearch(String memId) {
 		// TODO Auto-generated method stub

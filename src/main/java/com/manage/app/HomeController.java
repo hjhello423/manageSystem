@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manage.app.member.service.MemberService;
 import com.manage.app.repository.Member;
@@ -52,7 +53,7 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String root(Locale locale, HttpServletRequest request) {
+	public String root(Locale locale, HttpServletRequest request, Model model) {
 
 //		logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -73,7 +74,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@Valid Member member, BindingResult bindingResult, HttpServletRequest request) {
+	public String login(@Valid Member member, BindingResult bindingResult, HttpServletRequest request,
+			RedirectAttributes redirectAtttribute) {
 
 //		System.out.println(messageSource.getClass());
 //		System.out.println(messageSource.getMessage("hello",null,Locale.KOREA));
@@ -84,10 +86,10 @@ public class HomeController {
 		}
 
 		Member mem = memberService.memberSearch(member.getMemId(), member.getMemPw());
-//		logger.info(mem.toString());
 
 		if (mem == null) {
 			logger.info("로그인 실패 - 정보 없음");
+			redirectAtttribute.addAttribute("message", "ID, 비밀번호를 확인해 주세요");
 			return "redirect:/";
 		}
 
