@@ -1,6 +1,6 @@
 package com.manage.app.member.service;
 
-import com.manage.app.member.repository.Member;
+import com.manage.app.repository.Member;
 
 public interface IMemberService {
     void memberRegister(Member member);

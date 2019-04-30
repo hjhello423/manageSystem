@@ -573,9 +573,9 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="/app/resources/template/dist/js/demo.js"></script>
 	<script
-		src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+		src="/app/resources/template/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 	<script
-		src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+		src="/app/resources/template/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 	<script>
 		$(function() {

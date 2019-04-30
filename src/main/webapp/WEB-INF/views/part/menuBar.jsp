@@ -17,8 +17,8 @@
             <div class="collapse navbar-collapse pull-left"
                 id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="dropdown"><a href="#" class="dropdown-toggle"
-                        data-toggle="dropdown">제품 관리 <span class="caret"></span></a>
+                    <li class="dropdown">
+                    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">시리얼 관리 <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">전체 제품</a></li>
                             <li class="divider"></li>
@@ -27,9 +27,11 @@
                             <li><a href="#">B시리즈</a></li>
                             <li class="divider"></li>
                             <li><a href="#">S시리즈</a></li>
-                        </ul></li>
-                    <li class="active"><a href="#">제품 등록<span
-                            class="sr-only">(current)</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                    	<a href="/app/product/registration">시리얼 등록<span class="sr-only"></span></a>
+                    </li>
                     <li class="dropdown"><a href="#" class="dropdown-toggle"
                         data-toggle="dropdown">회원관리 <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">

@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.manage.app.member.repository.Member;
-import com.manage.app.member.repository.MemberRepository;
 import com.manage.app.member.service.MemberService;
+import com.manage.app.repository.Member;
+import com.manage.app.repository.MemberRepository;
 import com.mysql.cj.protocol.Message;
 
 /**

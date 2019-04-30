@@ -4,6 +4,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import com.manage.app.repository.Member;
+
 public class MemberValidator implements Validator{
 
 	@Override

@@ -9,35 +9,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.manage.app.LoginInterceptor;
-import com.manage.app.member.repository.Member;
-import com.manage.app.member.repository.MemberRepository;
+import com.manage.app.repository.Member;
+import com.manage.app.repository.MemberRepository;
 
 import javassist.NotFoundException;
 
 @Service
 public class MemberService implements IMemberService {
 
+	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
+	
 	@Autowired
 	private MemberRepository memberRepository;
-
-	@Autowired
-	com.manage.app.member.dao.MemberDao dao;
-	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 
 	@Transactional
 	@Override
 	public void memberRegister(Member member) {
-
-		logger.info("서비스 들어옴");
 		logger.info("요청 멤버 정보 : " + member.toString());
 
 		Member mem = memberRepository.saveAndFlush(member);
 
 		if (mem == null) {
-			logger.info("계정 등록 실패 - null");
+			logger.warn("계정 등록 실패 - null");
 		}
-
-		logger.info("반환 멤버 정보 : ");
 	}
 
 	@Transactional

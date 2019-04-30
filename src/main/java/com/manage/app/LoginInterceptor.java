@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.manage.app.member.repository.Member;
+import com.manage.app.repository.Member;
 
 public class LoginInterceptor implements HandlerInterceptor {
 

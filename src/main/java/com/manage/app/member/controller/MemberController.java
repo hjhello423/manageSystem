@@ -39,9 +39,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.manage.app.MemberDB;
 import com.manage.app.member.MemberLoginValidator;
-import com.manage.app.member.repository.Member;
 import com.manage.app.member.repository.MemberValidator;
 import com.manage.app.member.service.MemberService;
+import com.manage.app.repository.Member;
 import com.mysql.cj.Session;
 
 //@SessionAttributes("member")

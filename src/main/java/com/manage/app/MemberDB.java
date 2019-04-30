@@ -4,7 +4,7 @@ import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.manage.app.member.repository.Member;
+import com.manage.app.repository.Member;
 
 public class MemberDB {
 

@@ -39,7 +39,7 @@
 	</beans:bean>
 
 	<jpa:repositories
-		base-package="com.manage.app.member.repository">
+		base-package="com.manage.app.repository">
 	</jpa:repositories>
 
 	<!-- <context:component-scan base-package="com.manage.app" /> -->
@@ -69,7 +69,7 @@
 			ref="jpaVendorAdapter" />
 		<beans:property name="packagesToScan">
 			<beans:list>
-				<beans:value>com.manage.app.member.repository</beans:value>
+				<beans:value>com.manage.app.repository</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -83,6 +83,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/**" />
+			<mapping path="/product/**" />
 			<exclude-mapping path="/login" />
 			<exclude-mapping path="/register" />
 			<beans:bean class="com.manage.app.LoginInterceptor" />
