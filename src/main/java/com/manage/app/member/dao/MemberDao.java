@@ -13,24 +13,22 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.manage.app.MemberDB;
-import com.manage.app.domain.MemberRepository;
-import com.manage.app.member.Member;
+import com.manage.app.member.repository.Member;
+import com.manage.app.member.repository.MemberRepository;
 
 //@Component
 @Repository
 public class MemberDao implements IMemberDao {
 
 	private static HashMap<String, Member> dbMap;
-	
+
 //	@Autowired
 //	MemberRepository memberRepository;
-	
-
 
 	@PostConstruct
 	public void initPool() {
 	}
-	
+
 	@PreDestroy
 	public void destroyPool() {
 	}
@@ -44,10 +42,10 @@ public class MemberDao implements IMemberDao {
 		System.out.println("memberInsert()");
 
 		try {
-			MemberDB conn =  MemberDB.getInstance();
-			HashMap<String, Member> db =  conn.getData();
+			MemberDB conn = MemberDB.getInstance();
+			HashMap<String, Member> db = conn.getData();
 			db.put(member.getMemId(), member);
-			
+
 			conn.setData(db);
 		} catch (Exception e) {
 			System.out.println("exception 처리");
@@ -59,10 +57,10 @@ public class MemberDao implements IMemberDao {
 	public Member memberSelect(String memId, String memPw) {
 
 		Member member = null;
-		
+
 		HashMap<String, Member> data = MemberDB.getInstance().getData();
 		Iterator<String> itr = data.keySet().iterator();
-		
+
 		while (itr.hasNext()) {
 			String key = itr.next();
 			if (key.equals(memId)) {

@@ -27,9 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.manage.app.domain.MemberRepository;
-import com.manage.app.member.Member;
-import com.manage.app.member.MemberValidator;
+import com.manage.app.member.repository.Member;
+import com.manage.app.member.repository.MemberRepository;
 import com.manage.app.member.service.MemberService;
 import com.mysql.cj.protocol.Message;
 
@@ -64,31 +63,11 @@ public class HomeController {
 			logger.info("로그인 정보 X - 로그인 페이지 이동");
 			return "login";
 		}
-////////////////////////////////////////////////////////
 
-		logger.info(dataSource.toString());
+//		logger.info(dataSource.toString());
+//		com.manage.app.member.repository.Member m = memberRepository.findOne("33");
+//		logger.info(m.getMemId() + " : " + m.getMemMail());
 
-		com.manage.app.domain.Member m = memberRepository.findOne("33");
-		logger.info(m.getMemId() + " : " + m.getMemMail());
-
-//		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-//		List<Member> memList = jdbcTemplate.query(
-//				"select * from member", 
-//				new Object[] {},
-//				new RowMapper<Member>() {
-//					@Override
-//					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-//						Member m = new Member();
-//						m.setMemId(rs.getString("id"));
-//						m.setMemPw(rs.getString("pwd"));
-//						m.setMemMail(rs.getString("mail"));
-//						m.setMemName(rs.getString("name"));
-//						return m;
-//					}
-//				});
-//			System.out.println(memList.get(3).getMemId());
-
-//////////////////////////////////////////////////////		
 		logger.info("로그인 정보 O - 메인 페이지 이동 , ID:" + member.getMemId());
 		return "home";
 	}
@@ -96,22 +75,22 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@Valid Member member, BindingResult bindingResult, HttpServletRequest request) {
 
-		HttpSession session = request.getSession();
 //		System.out.println(messageSource.getClass());
 //		System.out.println(messageSource.getMessage("hello",null,Locale.KOREA));
-
+		HttpSession session = request.getSession();
 		if (bindingResult.hasErrors()) { // validate
 			logger.info("로그인 실패 - valid");
 			return "redirect:/";
 		}
 
 		Member mem = memberService.memberSearch(member.getMemId(), member.getMemPw());
+//		logger.info(mem.toString());
+
 		if (mem == null) {
 			logger.info("로그인 실패 - 정보 없음");
 			return "redirect:/";
 		}
 
-		logger.info("로그인 완료 - 셔센 등록");
 		session.setAttribute("member", mem);
 		session.setMaxInactiveInterval(60 * 5); // 5분 유지
 		return "redirect:/";
@@ -119,7 +98,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request) {
-		logger.info("로그 아웃 처리");
+		logger.info("log out");
 		request.getSession().invalidate();
 		return "redirect:/";
 	}
@@ -130,8 +109,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String memRegisterApi(@Valid Member member, BindingResult bindingResult, HttpServletRequest request,
-			Model model) {
+	public String memRegisterApi(Member member, BindingResult bindingResult, HttpServletRequest request, Model model) {
 
 		if (bindingResult.hasErrors()) {
 			logger.info("가입 실패 - valid");
@@ -139,6 +117,7 @@ public class HomeController {
 		}
 
 		memberService.memberRegister(member);
+		logger.info("멤버 정보 등록 완료");
 		model.addAttribute("message", "회원가입이 완료 되었습니다.");
 
 		return "redirect:/";

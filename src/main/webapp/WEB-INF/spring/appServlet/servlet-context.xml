@@ -38,10 +38,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<jpa:repositories base-package="com.manage.app.domain">
-	</jpa:repositories>
-
-	<jpa:repositories base-package="">
+	<jpa:repositories
+		base-package="com.manage.app.member.repository">
 	</jpa:repositories>
 
 	<!-- <context:component-scan base-package="com.manage.app" /> -->
@@ -71,14 +69,15 @@
 			ref="jpaVendorAdapter" />
 		<beans:property name="packagesToScan">
 			<beans:list>
-				<beans:value>com.manage.app.domain</beans:value>
+				<beans:value>com.manage.app.member.repository</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
 
 	<beans:bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<beans:property name="dataSource" ref="dataSource" />
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<beans:property name="entityManagerFactory"
+			ref="entityManagerFactory" />
 	</beans:bean>
 
 	<interceptors>

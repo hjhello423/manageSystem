@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +38,11 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 import com.manage.app.MemberDB;
-import com.manage.app.member.Member;
 import com.manage.app.member.MemberLoginValidator;
-import com.manage.app.member.MemberValidator;
+import com.manage.app.member.repository.Member;
+import com.manage.app.member.repository.MemberValidator;
 import com.manage.app.member.service.MemberService;
-
+import com.mysql.cj.Session;
 
 //@SessionAttributes("member")
 @Controller
@@ -50,16 +51,16 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	private ReloadableResourceBundleMessageSource messageSource;
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
+
 //	@ModelAttribute("member")
 //	public Member memModel() {
 //		return new Member();
 //	}
-	
+
 //	@ModelAttribute("serverTime")
 //	public String getServerTime() {
 //		Date date = new Date();
@@ -69,12 +70,47 @@ public class MemberController {
 //		
 //		return formattedDate;
 //	}
-	
+
+	@RequestMapping(value = { "/myInfo", "/profile" }, method = RequestMethod.GET)
+//	public String login(Member mem, HttpServletRequest req, BindingResult bindingResult) {
+	public String memInfo(HttpServletRequest request, Model model) {
+
+		HttpSession session = request.getSession();
+		Member mem = (Member) session.getAttribute("member");
+		mem = memberService.memberSearch(mem.getMemId(), mem.getMemPw());
+
+		model.addAttribute("member", mem);
+
+		logger.info(request.getRequestURI());
+		if (request.getRequestURI().equals("/app/member/myInfo")) {
+			return "member/memberInfo";
+		} else if (request.getRequestURI().equals("/app/member/profile")) {
+			return "member/profile";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/profile", method = RequestMethod.PUT)
+	public String viewProfile(@RequestBody Member member, BindingResult bindingResult, HttpServletRequest request,
+			Model model) {
+
+		logger.info(member.toString());
+		HttpSession session = request.getSession();
+		boolean result = memberService.memberModify(member);
+
+		logger.info("멤버 수정 결과 -" + result);
+
+		return "member/profile";
+
+	}
+
 	@RequestMapping("/test")
 	public String test() {
 		return "home";
 	}
-	
+
 //	@ResponseBody
 //	@RequestMapping(value = "/api/register", method = RequestMethod.POST)
 //	public String memRegisterApi(@RequestBody HashMap<String, String> registerMemberForm, 
@@ -102,30 +138,10 @@ public class MemberController {
 //			
 //		return "로그인";
 //	}
-	
-	@RequestMapping(value="/memInfo", method=RequestMethod.GET)
-//	public String login(Member mem, HttpServletRequest req, BindingResult bindingResult) {
-	public String memInfo(@ModelAttribute("member") Member mem, HttpServletRequest request, Model model) {
-		
-		System.out.println(mem.getMemId());
-		System.out.println(mem.getMemPw());
-		
-		
-		// id, pw 값 validate 
-//		new MemberLoginValidator().validate(mem, bindingResult);
-//		if (bindingResult.hasErrors()) {
-//			System.out.println("로그인 정보 없음 - validator");
-//			return "redirect:/";
-//			
-//		}
-		
-		return "member/memberInfo";
-	}
-	
-	
+
 //	@InitBinder
 //	protected void initBinder(WebDataBinder binder) {
 //		binder.setValidator(new MemberLoginValidator()); // 로그인 validater 등록
 //	}
-	
+
 }

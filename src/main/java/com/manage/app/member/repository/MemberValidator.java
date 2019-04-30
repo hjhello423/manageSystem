@@ -1,4 +1,4 @@
-package com.manage.app.member;
+package com.manage.app.member.repository;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

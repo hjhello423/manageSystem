@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,20 +14,20 @@
 	name="viewport">
 <!-- Bootstrap 3.3.7 -->
 <link rel="stylesheet"
-	href="resources/template/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	href="/app/resources/template/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
 <link rel="stylesheet"
-	href="resources/template/bower_components/font-awesome/css/font-awesome.min.css">
+	href="/app/resources/template/bower_components/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet"
-	href="resources/template/bower_components/Ionicons/css/ionicons.min.css">
+	href="/app/resources/template/bower_components/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
 <link rel="stylesheet"
-	href="resources/template/dist/css/AdminLTE.min.css">
+	href="/app/resources/template/dist/css/AdminLTE.min.css">
 <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet"
-	href="resources/template/dist/css/skins/_all-skins.min.css">
+	href="/app/resources/template/dist/css/skins/_all-skins.min.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,88 +44,7 @@
 <body class="hold-transition skin-blue layout-top-nav">
 	<div class="wrapper">
 
-
-
-
-
-
-		<!-- 메인 메뉴 바 -->
-		<header class="main-header">
-			<nav class="navbar navbar-static-top">
-				<div class="container">
-					<div class="navbar-header">
-						<a href="/app/login" class="navbar-brand"><b>Serial
-								Manager</b></a>
-						<button type="button" class="navbar-toggle collapsed"
-							data-toggle="collapse" data-target="#navbar-collapse">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
-
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse pull-left"
-						id="navbar-collapse">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Link <span
-									class="sr-only">(current)</span></a></li>
-							<li><a href="#">Link</a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown">회원관리 <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
-									<li class="divider"></li>
-									<li><a href="#">Separated link</a></li>
-									<li class="divider"></li>
-									<li><a href="#">One more separated link</a></li>
-								</ul></li>
-						</ul>
-					</div>
-					<!-- /.navbar-collapse -->
-					<!-- Navbar Right Menu -->
-					<div class="navbar-custom-menu">
-						<ul class="nav navbar-nav">
-
-							<!-- Notifications Menu -->
-							<li class="dropdown notifications-menu">
-								<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
-								data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span
-									class="label label-warning">10</span>
-							</a>
-								<ul class="dropdown-menu">
-									<li class="header">You have 10 notifications</li>
-									<li>
-										<!-- Inner Menu: contains the notifications -->
-										<ul class="menu">
-											<li>
-												<!-- start notification --> <a href="#"> <i
-													class="fa fa-users text-aqua"></i> 5 new members joined
-													today
-											</a>
-											</li>
-											<!-- end notification -->
-										</ul>
-									</li>
-									<li class="footer"><a href="#">View all</a></li>
-								</ul>
-							</li>
-
-
-						</ul>
-					</div>
-					<!-- /.navbar-custom-menu -->
-				</div>
-				<!-- /.container-fluid -->
-			</nav>
-		</header>
-		<!-- Full Width Column -->
-		<!-- 메인 메뉴 바 end-->
-
-
-
-
-
+		<%@ include file="/WEB-INF/views/part/menuBar.jsp"%>
 
 
 
@@ -135,120 +54,491 @@
 
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>
-					Dashboard <small>Version 2.0</small>
-				</h1>
+				<h1>내 정보</h1>
 				<ol class="breadcrumb">
-					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-					<li class="active">Dashboard</li>
+					<li><a href="/app"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li class="active">내 정보</li>
 				</ol>
 			</section>
 
 
 
-
 			<!-- Main content -->
 			<section class="content">
-
 				<!-- Info boxes -->
 				<div class="row">
-
-					<div class="row"></div>
-					<!-- /.row -->
-
-					<!-- Main row -->
-					<div class="row">
-						<!-- Left col -->
-						<div class="col-md-8">
-							<!-- MAP & BOX PANE -->
-
-							<!-- TABLE: LATEST ORDERS -->
-							<div class="box box-info">
-								<div class="box-header with-border">
-									<h3 class="box-title">최근 등록 제품</h3>
-
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool"
-											data-widget="remove">
-											<i class="fa fa-times"></i>
-										</button>
-									</div>
-								</div>
-								<!-- /.box-header -->
-								<div class="box-body">
-									<div class="table-responsive"></div>
-									<!-- /.table-responsive -->
-								</div>
-								<!-- /.box-body -->
-								<div class="box-footer clearfix">
-									<a href="javascript:void(0)"
-										class="btn btn-sm btn-info btn-flat pull-left">Place New
-										Order</a> <a href="javascript:void(0)"
-										class="btn btn-sm btn-default btn-flat pull-right">View
-										All Orders</a>
-								</div>
-								<!-- /.box-footer -->
+					<!-- left column -->
+					<div class="col-md-6">
+						<!-- general form elements -->
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">프로필</h3>
 							</div>
-							<!-- /.box -->
-						</div>
-						<!-- /.col -->
-
-						<div class="col-md-4">
-							<!-- Info Boxes Style 2 -->
-							<div class="box box-default">
-								<div class="box-header with-border">
-									<h3 class="box-title">Browser Usage</h3>
-
-									<div class="box-tools pull-right">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool"
-											data-widget="remove">
-											<i class="fa fa-times"></i>
-										</button>
-									</div>
-								</div>
-								<!-- /.box-header -->
+							<!-- /.box-header -->
+							<!-- form start -->
+							<form class="form-horizontal" action="/app/member/profile">
 								<div class="box-body">
-									<div class="row">
-										<div class="col-md-8">
-											<div class="chart-responsive">
-												<canvas id="pieChart" height="150"></canvas>
-											</div>
-											<!-- ./chart-responsive -->
+									<div class="form-group">
+										<label for="memId" class="col-sm-2 control-label text-center">ID</label> 
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="memId" value=${member.memId} readonly>
 										</div>
-										<!-- /.col -->
 									</div>
-									<!-- /.row -->
+									<div class="form-group">
+										<label for="memMail" class="col-sm-2 control-label text-center">mail</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" id="memMail" value=${member.memMail} readonly>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="memName" class="col-sm-2 control-label text-center">이름</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="memName" value=${member.memName} readonly>
+										</div>
+									</div>
 								</div>
 								<!-- /.box-body -->
-								<div class="box-footer no-padding">
-									<ul class="nav nav-pills nav-stacked">
-										<li><a href="#">United States of America <span
-												class="pull-right text-red"><i
-													class="fa fa-angle-down"></i> 12%</span></a></li>
-										<li><a href="#">India <span
-												class="pull-right text-green"><i
-													class="fa fa-angle-up"></i> 4%</span></a></li>
-										<li><a href="#">China <span
-												class="pull-right text-yellow"><i
-													class="fa fa-angle-left"></i> 0%</span></a></li>
-									</ul>
-								</div>
-								<!-- /.footer -->
-							</div>
-							<!-- /.box -->
 
+								<div class="box-footer text-left">
+									<button type="submit" class="btn btn-primary">수정</button>
+								</div>
+							</form>
 						</div>
-						<!-- /.col -->
+						<!-- /.box -->
 					</div>
-					<!-- /.row -->
+					<!--/.col (left) -->
+					<div class="col-md-6">
+
+						<div class="box-body">
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Rendering engine</th>
+										<th>Browser</th>
+										<th>Platform(s)</th>
+										<th>Engine version</th>
+										<th>CSS grade</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Trident</td>
+										<td>Internet Explorer 4.0</td>
+										<td>Win 95+</td>
+										<td>4</td>
+										<td>X</td>
+									</tr>
+									<tr>
+										<td>Trident</td>
+										<td>Internet Explorer 5.0</td>
+										<td>Win 95+</td>
+										<td>5</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>Trident</td>
+										<td>Internet Explorer 5.5</td>
+										<td>Win 95+</td>
+										<td>5.5</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Trident</td>
+										<td>Internet Explorer 6</td>
+										<td>Win 98+</td>
+										<td>6</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Trident</td>
+										<td>Internet Explorer 7</td>
+										<td>Win XP SP2+</td>
+										<td>7</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Trident</td>
+										<td>AOL browser (AOL desktop)</td>
+										<td>Win XP</td>
+										<td>6</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Firefox 1.0</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Firefox 1.5</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Firefox 2.0</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Firefox 3.0</td>
+										<td>Win 2k+ / OSX.3+</td>
+										<td>1.9</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Camino 1.0</td>
+										<td>OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Camino 1.5</td>
+										<td>OSX.3+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Netscape 7.2</td>
+										<td>Win 95+ / Mac OS 8.6-9.2</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Netscape Browser 8</td>
+										<td>Win 98SE+</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Netscape Navigator 9</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.0</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.1</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.1</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.2</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.2</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.3</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.3</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.4</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.4</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.5</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.5</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.6</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>1.6</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.7</td>
+										<td>Win 98+ / OSX.1+</td>
+										<td>1.7</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Mozilla 1.8</td>
+										<td>Win 98+ / OSX.1+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Seamonkey 1.1</td>
+										<td>Win 98+ / OSX.2+</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Gecko</td>
+										<td>Epiphany 2.20</td>
+										<td>Gnome</td>
+										<td>1.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>Safari 1.2</td>
+										<td>OSX.3</td>
+										<td>125.5</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>Safari 1.3</td>
+										<td>OSX.3</td>
+										<td>312.8</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>Safari 2.0</td>
+										<td>OSX.4+</td>
+										<td>419.3</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>Safari 3.0</td>
+										<td>OSX.4+</td>
+										<td>522.1</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>OmniWeb 5.5</td>
+										<td>OSX.4+</td>
+										<td>420</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>iPod Touch / iPhone</td>
+										<td>iPod</td>
+										<td>420.1</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Webkit</td>
+										<td>S60</td>
+										<td>S60</td>
+										<td>413</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 7.0</td>
+										<td>Win 95+ / OSX.1+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 7.5</td>
+										<td>Win 95+ / OSX.2+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 8.0</td>
+										<td>Win 95+ / OSX.2+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 8.5</td>
+										<td>Win 95+ / OSX.2+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 9.0</td>
+										<td>Win 95+ / OSX.3+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 9.2</td>
+										<td>Win 88+ / OSX.3+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera 9.5</td>
+										<td>Win 88+ / OSX.3+</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Opera for Wii</td>
+										<td>Wii</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Nokia N800</td>
+										<td>N800</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Presto</td>
+										<td>Nintendo DS browser</td>
+										<td>Nintendo DS</td>
+										<td>8.5</td>
+										<td>C/A<sup>1</sup></td>
+									</tr>
+									<tr>
+										<td>KHTML</td>
+										<td>Konqureror 3.1</td>
+										<td>KDE 3.1</td>
+										<td>3.1</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>KHTML</td>
+										<td>Konqureror 3.3</td>
+										<td>KDE 3.3</td>
+										<td>3.3</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>KHTML</td>
+										<td>Konqureror 3.5</td>
+										<td>KDE 3.5</td>
+										<td>3.5</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Tasman</td>
+										<td>Internet Explorer 4.5</td>
+										<td>Mac OS 8-9</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr>
+										<td>Tasman</td>
+										<td>Internet Explorer 5.1</td>
+										<td>Mac OS 7.6-9</td>
+										<td>1</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>Tasman</td>
+										<td>Internet Explorer 5.2</td>
+										<td>Mac OS 8-X</td>
+										<td>1</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>NetFront 3.1</td>
+										<td>Embedded devices</td>
+										<td>-</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>NetFront 3.4</td>
+										<td>Embedded devices</td>
+										<td>-</td>
+										<td>A</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>Dillo 0.8</td>
+										<td>Embedded devices</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>Links</td>
+										<td>Text only</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>Lynx</td>
+										<td>Text only</td>
+										<td>-</td>
+										<td>X</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>IE Mobile</td>
+										<td>Windows Mobile 6</td>
+										<td>-</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>Misc</td>
+										<td>PSP browser</td>
+										<td>PSP</td>
+										<td>-</td>
+										<td>C</td>
+									</tr>
+									<tr>
+										<td>Other browsers</td>
+										<td>All others</td>
+										<td>-</td>
+										<td>-</td>
+										<td>U</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Rendering engine</th>
+										<th>Browser</th>
+										<th>Platform(s)</th>
+										<th>Engine version</th>
+										<th>CSS grade</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.box-body -->
+
+					</div>
+					<!--/.col (left) -->
+				</div>
+				<!-- /.row -->
+
 			</section>
 			<!-- /.content -->
 
@@ -261,36 +551,45 @@
 		</div>
 		<!-- /.content-wrapper -->
 
-		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="container">
-				<div class="pull-right hidden-xs">
-					<b>Version</b> 2.4.0
-				</div>
-				<strong>Copyright &copy; 2014-2016 <a
-					href="https://adminlte.io">Almsaeed Studio</a>.
-				</strong> All rights reserved.
-			</div>
-			<!-- /.container -->
-		</footer>
+		<%@ include file="/WEB-INF/views/part/footer.jsp"%>
+
 	</div>
 	<!-- ./wrapper -->
 
 	<!-- jQuery 3 -->
 	<script
-		src="resources/template/bower_components/jquery/dist/jquery.min.js"></script>
+		src="/app/resources/template/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script
-		src="resources/template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		src="/app/resources/template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- SlimScroll -->
 	<script
-		src="resources/template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		src="/app/resources/template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- FastClick -->
 	<script
-		src="resources/template/bower_components/fastclick/lib/fastclick.js"></script>
+		src="/app/resources/template/bower_components/fastclick/lib/fastclick.js"></script>
 	<!-- AdminLTE App -->
-	<script src="resources/template/dist/js/adminlte.min.js"></script>
+	<script src="/app/resources/template/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="resources/template/dist/js/demo.js"></script>
+	<script src="/app/resources/template/dist/js/demo.js"></script>
+	<script
+		src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script
+		src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+	<script>
+		$(function() {
+			$('#example1').DataTable()
+			$('#example2').DataTable({
+				'paging' : true,
+				'lengthChange' : false,
+				'searching' : false,
+				'ordering' : true,
+				'info' : true,
+				'autoWidth' : false
+			})
+		})
+	</script>
+
 </body>
 </html>
