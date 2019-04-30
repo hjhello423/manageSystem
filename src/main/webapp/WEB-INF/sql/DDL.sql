@@ -10,8 +10,13 @@ CREATE TABLE member (
 CREATE TABLE product (
     serial VARCHAR(20) PRIMARY KEY,
 	license VARCHAR(20),
+	nation VARCHAR(3),
+    mac VARCHAR(20),
+    os VARCHAR(20),
+    model_line VARCHAR(20),
+    model VARCHAR(20),
+    sale VARCHAR(1),
 	regDate DATETIME,
-	endDate DATETIME,
 	register VARCHAR(12),
     FOREIGN KEY(register) REFERENCES member (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

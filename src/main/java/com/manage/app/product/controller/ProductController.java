@@ -1,5 +1,8 @@
 package com.manage.app.product.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.manage.app.product.service.ProductService;
 import com.manage.app.repository.Member;
 import com.manage.app.repository.Product;
+
 
 @Controller
 @RequestMapping("/product")
@@ -43,18 +47,33 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public String productRegister(@RequestBody Product product, HttpServletRequest request, Model model) {
-		logger.info("제품 등록 컨트롤러 in");
 
-		Product prod = new Product();
 		Member mem = (Member) request.getSession().getAttribute("member");
+		productService.productRegister(product, mem);
 		
-		productService.productRegister(prod, mem);
-		
-		logger.info("제품 등록 컨트롤러 out");
 		
 		// 335페이지 WebDataBinder 이용하여 날짜 변경
 		HttpSession session = request.getSession();
 		return "product/productRegister";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/myProduct", method = RequestMethod.GET)
+	public HashMap<String, List<Product>> productRegister(HttpServletRequest request, Model model) {
+
+		logger.info("컨트롤러 in");
+		
+		Member mem = (Member) request.getSession().getAttribute("member");
+		
+		HashMap<String, List<Product>> map = productService.myProduct(mem);
+		
+		logger.info("컨트롤러 out");
+		
+		
+		logger.info("제품 등록 컨트롤러 out");
+		
+		// 335페이지 WebDataBinder 이용하여 날짜 변경
+		HttpSession session = request.getSession();
+		return map;
+	}
 }

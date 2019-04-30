@@ -1,6 +1,7 @@
 package com.manage.app.repository;
 
 import java.lang.annotation.Native;
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.persistence.Column;
@@ -18,7 +19,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "member")
 public class Member {
 	@Id
-	
 	@Column(name = "id")
 	private String memId;
 
@@ -33,6 +33,9 @@ public class Member {
 
 	@Column(name = "mem_qualify")
 	private int memQualify = 3;
+
+	@OneToMany(mappedBy = "mem")
+	private Collection<Product> products;
 
 	public Member() {
 	}

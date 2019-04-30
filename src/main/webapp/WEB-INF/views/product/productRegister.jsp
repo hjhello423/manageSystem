@@ -14,21 +14,16 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
 <!-- Bootstrap 3.3.7 -->
-<link rel="stylesheet"
-	href="/app/resources/template/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/app/resources/template/bower_components/bootstrap/dist/css/bootstrap.min.css">
 <!-- Font Awesome -->
-<link rel="stylesheet"
-	href="/app/resources/template/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/app/resources/template/bower_components/font-awesome/css/font-awesome.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet"
-	href="/app/resources/template/bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="/app/resources/template/bower_components/Ionicons/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet"
-	href="/app/resources/template/dist/css/AdminLTE.min.css">
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-<link rel="stylesheet"
-	href="/app/resources/template/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="/app/resources/template/dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+<link rel="stylesheet" href="/app/resources/template/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="/app/resources/template/bower_components/jquery-ui/themes/base/jquery-ui.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,7 +41,6 @@
 	<div class="wrapper">
 
 		<%@ include file="/WEB-INF/views/part/menuBar.jsp"%>
-
 
 
 		<!-- Content Wrapper. Contains page content -->
@@ -78,10 +72,8 @@
 								<div class="col-md-6">
 									<div class="box-body">
 										<div class="form-group">
-											<label for="memId">국가</label> 
-											<select
-												class="form-control m-b" id="nation" name="nation"
-												onchange="changeModelLine()">
+											<label for="nation">국가</label> <select
+												class="form-control m-b" id="nation" name="nation">
 												<option value='KR' selected>한국 (KR)</option>
 												<option value='JP'>일본 (JP)</option>
 												<option value='CN'>중국 (CN)</option>
@@ -94,16 +86,16 @@
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="memMail">비밀번호</label> <input type="password"
-												class="form-control" name="memPw">
+											<label for="mac">MAC</label> <input type="text"
+												class="form-control" id="mac" name="mac">
 										</div>
 										<div class="form-group">
-											<label for="memMail">mail</label> <input type="email"
-												class="form-control" name="memMail">
-										</div>
-										<div class="form-group">
-											<label for="memName">이름</label> <input type="text"
-												class="form-control" name="memName">
+											<label for="memMail">OS</label> <select
+												class="form-control m-b" id="os" name="os">
+												<option value='Winsows' selected>Windows (W)</option>
+												<option value='Centos'>CentOS (C)</option>
+												<option value='Ubuntu'>Ubuntu (U)</option>
+											</select>
 										</div>
 									</div>
 									<!-- /.box-body -->
@@ -111,33 +103,35 @@
 								<div class="col-md-6">
 									<div class="box-body">
 										<div class="form-group">
-											<label for="memId">제품 시리즈</label> 
-											<select
-												class="form-control m-b" id="nation" name="model"
+											<label for="modelLine">제품 시리즈</label> <select
+												class="form-control m-b" id="modelLine" name="modelLine"
 												onchange="changeModelLine()">
-												<option value='A' selected>A 시리즈</option>
-												<option value='B'>B 시리즈</option>
-												<option value='S'>S 시리즈</option>
+												<option value="non" selected>----------</option>
+												<option value="A">A 시리즈</option>
+												<option value="B">B 시리즈</option>
+												<option value="S">S 시리즈</option>
 											</select>
 										</div>
 										<div class="form-group">
-											<label for="memMail">비밀번호</label> <input type="password"
-												class="form-control" name="memPw">
+											<label for="model">제품 종류</label> <select
+												class="form-control m-b" id="model" name="model">
+												<option value="non" selected>----------</option>
+											</select>
 										</div>
 										<div class="form-group">
-											<label for="memMail">mail</label> <input type="email"
-												class="form-control" name="memMail">
-										</div>
-										<div class="form-group">
-											<label for="memName">이름</label> <input type="text"
-												class="form-control" name="memName">
+											<label for="sale">발급 유형</label> <select
+												class="form-control m-b" id="sale" name="sale">
+												<option value='S' selected>납품 (S)</option>
+												<option value='D'>데모 (D)</option>
+												<option value='T'>시험 (T)</option>
+											</select>
 										</div>
 									</div>
 									<!-- /.box-body -->
 								</div>
 
 								<div class="box-footer text-left">
-									<button type="button" class="btn btn-primary" id="registerBtn">등록</button>
+									<button type="button" class="btn btn-primary pull-right" id="registerBtn">등록</button>
 								</div>
 							</form>
 						</div>
@@ -174,27 +168,40 @@
 	<!-- AdminLTE App -->
 	<script src="/app/resources/template/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
-	<script src="/app/resources/template/dist/js/demo.js"></script>
+    <script src="/app/resources/template/dist/js/demo.js"></script>
+    <script src="/app/resources/template/bower_components/jquery-ui/jquery-ui.js"></script>
 
 	<script>
+		// $(function() {
+		// 	$("#endDate").datepicker();
+		// });
+
 		$("#registerBtn").click(function() {
 			checkData();
 		});
 
 		function checkData() {
-			if ($("input[name=memName]").val().trim() == "") {
-				alert("이름을 입력 하세요");
-				$("input[name=memName]").focus();
+			var chkInput = /[\{\}\[\]\?\;\:\|\*\~\`\!\^\\\@\$\%\=\'\"]/gi;
+
+			if ($("input[name=mac]").val().trim() == "") {
+				alert("MAC값을 입력 하세요");
+				$("input[name=mac]").focus();
+				return;
+            }
+
+			if ($("input[name=mac]").val().trim().length < 5) {
+				alert("MAC값이 너무 짧습니다");
+				$("input[name=mac]").focus();
 				return;
 			}
-			if ($("input[name=memPw]").val().trim() == "") {
-				alert("비밀번호를 입력 하세요");
-				$("input[name=memName]").focus();
+
+			if ($("select[name=modelLine]").val() == "non") {
+				alert("제품시리즈를 선택 하세요");
 				return;
 			}
-			if ($("input[name=memMail]").val().trim() == "") {
-				alert("이름을 입력 하세요");
-				$("input[name=memName]").focus();
+
+			if ($("select[name=model]").val() == "non") {
+				alert("제품종류를 선택 하세요");
 				return;
 			}
 
@@ -203,7 +210,8 @@
 			for (var i = 0; i < formArray.length; i++) {
 				returnArray[formArray[i]['name']] = formArray[i]['value'];
 			}
-			var _data = JSON.stringify(returnArray);
+            var _data = JSON.stringify(returnArray);
+            console.log(_data);
 			addMember(_data);
 		}
 
@@ -226,6 +234,42 @@
 					window.location.replace("/app/member/myInfo");
 				}
 			});
+		}
+
+		function changeModelLine() {
+			$("select[name=model]").find("option").remove();
+
+			if ($("select[name=modelLine] option:selected").val() == 'A') {
+				$("select[name=model]")
+						.append(
+								"<option value='10' selected='selected'>A시리즈 10</option>");
+				$("select[name=model]").append(
+						"<option value='20'>A시리즈 20</option>");
+				$("select[name=model]").append(
+						"<option value='30'>A시리즈 30</option>");
+				$("select[name=model]").append(
+						"<option value='40'>A시리즈 40</option>");
+			} else if ($("select[name=modelLine] option:selected").val() == 'B') {
+				$("select[name=model]")
+						.append(
+								"<option value='10' selected='selected'>B시리즈 10</option>");
+				$("select[name=model]").append(
+						"<option value='20'>B시리즈 20</option>");
+				$("select[name=model]").append(
+						"<option value='30'>B시리즈 30</option>");
+				$("select[name=model]").append(
+						"<option value='40'>B시리즈 40</option>");
+			} else if ($("select[name=modelLine] option:selected").val() == 'S') {
+				$("select[name=model]")
+						.append(
+								"<option value='10'selected='selected'>S시리즈 10</option>");
+				$("select[name=model]").append(
+						"<option value='20'>S시리즈 20</option>");
+				$("select[name=model]").append(
+						"<option value='30'>S시리즈 30</option>");
+				$("select[name=model]").append(
+						"<option value='40'>S시리즈 40</option>");
+			}
 		}
 	</script>
 
